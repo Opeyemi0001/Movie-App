@@ -16,22 +16,25 @@ function App() {
       }
     ]
   );
-  const [filterTitle, setFilterTitle] = useState("");
-  const [filterRating, setFilterRating] = useState(0);
+  const [filters, setFilters] = useState({title:"", rating: 0});
+
+  const handleApplyFilters = ({title, rating}) => {
+    setFilters({filters, rating});
+  };
 
   const handleAddMovie = (newMovie) => {
     setMovies([...movies, newMovie]);
   };
 
   const filteredMovies = movies.filter((movie) =>
-      movie.title.toLowerCase().includes(filterTitle.toLowerCase()) &&
-      movie.rating >= filterRating
+      movie.title.toLowerCase().includes(filters.title.toLowerCase()) &&
+      movie.rating >= filters.rating
   );
 
   return (
     <>
-      <div>
-        <Filter onTitleChange={setFilterTitle} onRatingChange={setFilterRating} />
+      <div className='container'>
+        <Filter onApplyFilter={handleApplyFilters} />
         <AddMovieForm onAddMovie={handleAddMovie} />
         <MovieList movies={filteredMovies} />
 
