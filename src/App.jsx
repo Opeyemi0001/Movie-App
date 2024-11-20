@@ -4,6 +4,8 @@ import './App.css'
 import Filter from './components/Filter'
 import MovieList from './components/MovieList'
 import AddMovieForm from './components/AddMovieForm';
+import { Route, Routes } from 'react-router-dom';
+import MovieCard from './components/MovieCard';
 
 function App() {
   const [movies, setMovies] = useState(
@@ -37,6 +39,9 @@ function App() {
         <Filter onApplyFilter={handleApplyFilters} />
         <AddMovieForm onAddMovie={handleAddMovie} />
         <MovieList movies={filteredMovies} />
+        <Routes>
+          <Route path='/movie/:id' element={MovieCard} />
+        </Routes>
 
       </div>
     </>
